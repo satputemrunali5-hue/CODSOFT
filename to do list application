@@ -1,0 +1,62 @@
+tasks = []
+
+print("=========================================")
+print("  INTERNSHIP PROJECT: TO-DO APPLICATION  ")
+print("=========================================")
+
+while True:
+    # 1. Display the main menu options to the user
+    print("\n--- MAIN MENU ---")
+    print("1. View Current Tasks")
+    print("2. Add a New Task")
+    print("3. Delete a Completed Task")
+    print("4. Close Application")
+    
+    # 2. Get the user's menu choice
+    choice = input("\nChoose an action (1-4): ").strip()
+    
+    # ACTION 1: VIEW TASKS
+    if choice == "1":
+        if len(tasks) == 0:
+            print("\n[!] Your to-do list is currently empty.")
+        else:
+            print("\nYOUR CURRENT TASKS:")
+            # Loop through the list and print tasks with numbers starting at 1
+            for index, task in enumerate(tasks, start=1):
+                print(f"  {index}. {task}")
+                
+    # ACTION 2: ADD TASK
+    elif choice == "2":
+        new_task = input("\nType the task you want to add: ").strip()
+        if new_task != "":
+            tasks.append(new_task)
+            print(f"-> Success: '{new_task}' added to your list.")
+        else:
+            print("-> Error: You cannot add an empty task!")
+            
+    # ACTION 3: DELETE TASK
+    elif choice == "3":
+        if len(tasks) == 0:
+            print("\n[!] There are no tasks to delete.")
+        else:
+            print("\nSelect the task number you want to delete:")
+            for index, task in enumerate(tasks, start=1):
+                print(f"  {index}. {task}")
+                
+            try:
+                task_number = int(input("\nEnter task number: "))
+                # Subtract 1 because Python list indexing starts at 0
+                removed_task = tasks.pop(task_number - 1)
+                print(f"-> Success: '{removed_task}' has been removed.")
+            except (ValueError, IndexError):
+                # Safely catches if the user types letters or a number not in the list
+                print("-> Error: Invalid choice! Please select a valid number from the list.")
+                
+    # ACTION 4: EXIT APP
+    elif choice == "4":
+        print("\nExiting application. Thank you for using the Task Manager!")
+        break  # Stops the while loop to close the program smoothly
+        
+    # ACCIDENTAL INPUT HANDLING
+    else:
+        print("-> Invalid input! Please enter a number between 1 and 4.")

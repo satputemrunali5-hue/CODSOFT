@@ -1,0 +1,55 @@
+print("=========================================")
+print("   INTERNSHIP PROJECT: EASY CALCULATOR   ")
+print("=========================================")
+
+while True:
+    print("\nAvailable Operations:")
+    print("  + : Addition")
+    print("  - : Subtraction")
+    print("  * : Multiplication")
+    print("  / : Division")
+    print("  q : Quit Calculator")
+    
+    # 1. Get the operation choice from the user
+    operation = input("\nChoose an operation (+, -, *, /, q): ").strip()
+    
+    # Check if the user wants to close the program
+    if operation.lower() == 'q':
+        print("\nClosing calculator. Thank you!")
+        break
+        
+    # Check if the user typed an invalid symbol
+    if operation not in ['+', '-', '*', '/']:
+        print("-> Error: Invalid operation symbol! Try again.")
+        continue
+
+    # 2. Grab the two numbers with error handling for non-numeric inputs
+    try:
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+    except ValueError:
+        print("-> Error: Please enter valid numbers only!")
+        continue
+
+    # 3. Perform the math logic based on the operator selection
+    if operation == '+':
+        result = num1 + num2
+        print(f"\nResult: {num1} + {num2} = {result}")
+        
+    elif operation == '-':
+        result = num1 - num2
+        print(f"\nResult: {num1} - {num2} = {result}")
+        
+    elif operation == '*':
+        result = num1 * num2
+        print(f"\nResult: {num1} * {num2} = {result}")
+        
+    elif operation == '/':
+        # Critical guard against math explosion (ZeroDivisionError)
+        if num2 == 0:
+            print("-> Error: Cannot divide by zero!")
+        else:
+            result = num1 / num2
+            print(f"\nResult: {num1} / {num2} = {result}")
+
+    print("-" * 30)
